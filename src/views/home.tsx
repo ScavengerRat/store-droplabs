@@ -3,6 +3,7 @@ import {Await, useLoaderData} from "react-router-dom";
 import Product from "@/components/product/product.tsx";
 import ProductSkeleton from "@/components/product/product-skeleton.tsx";
 import type {ProductInterface} from "@/api/interfaces/product.interface.ts";
+import ProductError from "@/components/product/product-error.tsx";
 
 const Home = () => {
 
@@ -14,7 +15,7 @@ const Home = () => {
             <p className="mb-8 text-neutral-600">Check out our products</p>
 
             <React.Suspense fallback={<ProductSkeleton/>}>
-                <Await resolve={product}>
+                <Await resolve={product} errorElement={<ProductError/>}>
                     {(product) => <Product {...product} />}
                 </Await>
             </React.Suspense>

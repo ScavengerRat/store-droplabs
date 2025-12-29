@@ -5,6 +5,7 @@ import Product from "@/components/product/product.tsx";
 import type {ProductInterface} from "@/api/interfaces/product.interface.ts";
 import {useProductSort} from "@/hooks/use-product-sort.ts";
 import ProductSkeleton from "@/components/product/product-skeleton.tsx";
+import ProductError from "@/components/product/product-error.tsx";
 
 const Products = () => {
 
@@ -36,7 +37,7 @@ const Products = () => {
                     ))}
                 </div>
             }>
-                <Await resolve={products}>
+                <Await resolve={products} errorElement={<ProductError/>}>
                     {(products) => {
                         const sortedProducts = sortProducts(products);
 

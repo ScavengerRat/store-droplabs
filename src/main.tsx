@@ -11,11 +11,13 @@ import {randomProductLoader} from "@/api/random-product-loader.ts";
 import {PersistGate} from "redux-persist/integration/react";
 import {Provider} from "react-redux";
 import {persistor, store} from "@/store/store.ts";
+import RootErrorBoundary from "@/components/errors/root-error-boundary.tsx";
 
 const router = createBrowserRouter([
     {
         path: "/",
         Component: Layout,
+        ErrorBoundary: RootErrorBoundary,
         children: [
             {
                 index: true,
