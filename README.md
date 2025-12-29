@@ -15,6 +15,7 @@ Projekt został zrealizowany w oparciu o nowoczesne standardy i narzędzia:
 - **Styling:** Tailwind CSS + Shadcn/ui
 - **Icons:** Lucide React
 - **API:** FakeStoreAPI
+- **Testing:** Vitest (testy jednostkowe koszyka)
 
 ## ✅ Zrealizowane funkcjonalności
 
@@ -40,6 +41,10 @@ Projekt został zrealizowany w oparciu o nowoczesne standardy i narzędzia:
 - [x] Dodawanie, usuwanie i zmiana ilości produktów.
 - [x] Stan koszyka zachowany po odświeżeniu strony (Redux Persist).
 - [x] Licznik produktów oraz cen.
+
+### 5. Jakość i Testy
+- [x] **Unit Testing:** Implementacja testów jednostkowych dla kluczowej logiki biznesowej koszyka (`cartSlice`) z wykorzystaniem **Vitest**.
+- [x] Pokrycie przypadków brzegowych: dodawanie duplikatów, usuwanie ostatniej sztuki, czyszczenie koszyka, przeliczanie sumy całkowitej.
 
 ## Decyzje architektoniczne
 
@@ -71,5 +76,30 @@ Wymagany Node.js (wersja 24 zalecana).
     ```bash
     npm run dev
     ```
+    
+4. Uruchom testy jednostkowe::
+    ```bash
+    npm run test
+    ```
 
-4.  Otwórz http://localhost:5173 w przeglądarce.
+5. Otwórz http://localhost:5173 w przeglądarce.
+
+
+## 📂 Struktura projektu (Główne katalogi)
+
+```bash
+src/
+├── api/             # Logika pobierania danych (loaders) i interfejsy
+├── components/
+│   ├── cart/        # Komponenty koszyka
+│   ├── errors/      # Obsługa błędów (RootErrorBoundary, ErrorElement)
+│   ├── navigation/  # Pasek nawigacji
+│   ├── product/     # Komponenty produktów
+│   ├── ui/          # Komponenty biblioteki Shadcn (Button, Card, etc.)
+│   └── layout.tsx   # Główny layout aplikacji
+├── constants/       # Stałe (URL API, elementy menu)
+├── hooks/           # Custom hooki (useProductSort)
+├── lib/             # Funkcje pomocnicze (utils)
+├── store/           # Konfiguracja Redux i Slice koszyka
+└── views/           # Główne widoki stron (Home, Products, NotFound)
+```
