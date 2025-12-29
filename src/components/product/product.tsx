@@ -2,9 +2,17 @@ import type {ProductInterface} from "@/api/interfaces/product.interface.ts";
 import {Card, CardContent, CardFooter, CardHeader, CardTitle} from "@/components/ui/card.tsx";
 import {Button} from "@/components/ui/button.tsx";
 import {getPrice} from "@/lib/utils.ts";
+import {useAppDispatch, useAppSelector} from "@/hooks/store-hooks.ts";
+import {addToCart} from "@/store/cartSlice.ts";
 
 const Product = (product: ProductInterface) => {
-    const {image, title, category, rating, price} = product;
+    const {image, title, category, rating, price, id} = product;
+
+    const dispatch = useAppDispatch()
+    const {itemList} = useAppSelector((state) => state.cart)
+
+    const itemInCart = itemList.find(product => product.id === id);
+
 
     return (
         <Card className="w-full max-w-md">
@@ -21,8 +29,8 @@ const Product = (product: ProductInterface) => {
                 <p className="text-xl font-bold">{getPrice(price)}</p>
             </CardContent>
             <CardFooter className="flex justify-between items-center">
-                <Button className="w-full" size="lg">
-                    Add to cart
+                <Button onClick={() => dispatch(addToCart(product))} className="w-full" size="lg">
+                    Add to cart {itemInCart && `(${itemInCart.quantity})`}
                 </Button>
             </CardFooter>
         </Card>

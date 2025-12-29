@@ -8,6 +8,9 @@ import NotFound from "./views/not-found";
 import {productsLoader} from "@/api/products-loader.ts";
 import Home from "@/views/home.tsx";
 import {randomProductLoader} from "@/api/random-product-loader.ts";
+import {PersistGate} from "redux-persist/integration/react";
+import {Provider} from "react-redux";
+import {persistor, store} from "@/store/store.ts";
 
 const router = createBrowserRouter([
     {
@@ -34,6 +37,10 @@ const router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     <StrictMode>
-        <RouterProvider router={router}/>
+        <Provider store={store}>
+            <PersistGate loading={null} persistor={persistor}>
+                <RouterProvider router={router}/>
+            </PersistGate>
+        </Provider>
     </StrictMode>,
 )

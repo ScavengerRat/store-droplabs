@@ -1,5 +1,6 @@
 import {NAVIGATION} from "@/constants/navigation.ts";
 import NavigationItem from "@/components/navigation/navigation-item.tsx";
+import Cart from "@/components/cart/cart.tsx";
 
 const Navigation = () => {
     return (
@@ -12,7 +13,7 @@ const Navigation = () => {
                         }
                     </div>
 
-                    <div>cart</div>
+                    <Cart/>
                 </div>
             </div>
         </nav>
