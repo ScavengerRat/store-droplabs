@@ -3,7 +3,7 @@ import {Await, useLoaderData} from "react-router-dom";
 import Product from "@/components/product/product.tsx";
 import ProductSkeleton from "@/components/product/product-skeleton.tsx";
 import type {ProductInterface} from "@/api/interfaces/product.interface.ts";
-import ProductError from "@/components/product/product-error.tsx";
+import ProductError from "@/components/errors/product-error.tsx";
 
 const Home = () => {
 
