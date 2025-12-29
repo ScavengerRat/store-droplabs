@@ -27,7 +27,13 @@ const router = createBrowserRouter([
             {
                 path: "products",
                 Component: Products,
-                loader: productsLoader
+                loader: productsLoader,
+                shouldRevalidate: ({currentUrl, nextUrl, defaultShouldRevalidate}) => {
+                    if (currentUrl.pathname === nextUrl.pathname) {
+                        return false;
+                    }
+                    return defaultShouldRevalidate;
+                }
             },
             {
                 path: "*",
