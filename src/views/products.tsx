@@ -2,18 +2,20 @@ import {Select, SelectContent, SelectItem, SelectTrigger, SelectValue} from "@/c
 import {Await, useLoaderData} from "react-router-dom";
 import React from "react";
 import Product from "@/components/product/product.tsx";
-import ProductSkeleton from "@/components/product/product-skeleton.tsx";
 import type {ProductInterface} from "@/api/interfaces/product.interface.ts";
+import {useProductSort} from "@/hooks/use-product-sort.ts";
+import ProductSkeleton from "@/components/product/product-skeleton.tsx";
 
 const Products = () => {
 
     const {products} = useLoaderData() as { products: Promise<ProductInterface[]> };
+    const {currentSort, handleSortChange, sortProducts} = useProductSort();
 
     return (
         <div>
             <div className="flex justify-between items-center mb-4">
                 <h1 className="text-2xl font-bold">Products</h1>
-                <Select>
+                <Select value={currentSort} onValueChange={handleSortChange}>
                     <SelectTrigger className="w-45">
                         <SelectValue placeholder="Sort products"/>
                     </SelectTrigger>
@@ -36,10 +38,12 @@ const Products = () => {
             }>
                 <Await resolve={products}>
                     {(products) => {
+                        const sortedProducts = sortProducts(products);
+
                         return (
                             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4 gap-6">
                                 {
-                                    products.map(product => <Product key={product.id} {...product} />)
+                                    sortedProducts.map(product => <Product key={product.id} {...product} />)
                                 }
                             </div>
                         )
